@@ -12,7 +12,7 @@ class DB
     protected static $_nested_transaction_sequence = 1;
     protected static $_nested_transaction_memory = array();
     
-    // Initialize the database connection, and check if tables exist.
+    // Initialize the database connection.
     
     public static function initialize($filename_or_pdo)
     {
