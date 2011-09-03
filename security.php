@@ -237,7 +237,7 @@ class Security
             
                 // Basic checks.
                 
-                switch ($rule)
+                switch ($first_rule)
                 {
                     case 'alpha': if (!ctype_alpha($input)) return false; break;
                     case 'alnum': if (!ctype_alnum($input)) return false; break;
