@@ -25,18 +25,6 @@ class Cache
                 self::$_con->addServer($host, $port, $weight);
             }
         }
-        elseif (class_exists('\Memcache'))
-        {
-            self::$_con = new \Memcache();
-            foreach($servers as $server)
-            {
-                $server = explode(':', $server);
-                $host = $server[0];
-                $port = isset($server[1]) ? $server[1] : 11211;
-                $weight = isset($server[2]) ? $server[2] : 100;
-                self::$_con->addServer($host, $port, false, $weight);
-            }
-        }
         else
         {
             throw new CacheException('Memcached extension is not available.');
