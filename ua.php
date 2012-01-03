@@ -49,7 +49,7 @@ class UA
         
         // Check for common robot user agents. "bot" catches Googlebot as well as a lot of obscure robots.
         
-        if (preg_match('/bot|msnbot|slurp|facebook(externalhit|scraper)|ask jeeves|teoma|baidu|daumoa|naverbot|lycos/', $user_agent)) return true;
+        if (preg_match('/bot|msnbot|slurp|facebook(externalhit|scraper)|ask jeeves|teoma|baidu|daumoa|naverbot|lycos/', $ua)) return true;
         return false;
     }
 }
