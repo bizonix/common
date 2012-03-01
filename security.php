@@ -26,13 +26,13 @@ class Security
             
             case 'escape':
                 if (!mb_check_encoding($input, 'UTF-8')) return false;
-                return trim(htmlentities($input, ENT_QUOTES, 'UTF-8', false));
+                return trim(htmlspecialchars($input, ENT_QUOTES, 'UTF-8', true));
             
             // Plain text, escaped and stripped of tags.
             
             case 'strip':
                 if (!mb_check_encoding($input, 'UTF-8')) return false;
-                return trim(htmlentities(strip_tags($input), ENT_QUOTES, 'UTF-8', false));
+                return trim(htmlspecialchars(strip_tags($input), ENT_QUOTES, 'UTF-8', true));
             
             // Filename.
             

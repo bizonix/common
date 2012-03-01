@@ -194,7 +194,7 @@ class Template
             
             // If there's only one part, just print it.
             
-            if (count($pipes) === 1) return '<?php echo htmlentities(' . $code . ', ENT_QUOTES, \'UTF-8\', false); ?>';
+            if (count($pipes) === 1) return '<?php echo htmlspecialchars(' . $code . ', ENT_QUOTES, \'UTF-8\', true); ?>';
             
             // Otherwise, initialize the filter chain.
             
@@ -230,7 +230,7 @@ class Template
                         break;
                         
                     case 'strip':
-                        $chain = 'htmlentities(strip_tags(' . $chain . '), ENT_QUOTES, \'UTF-8\', false)';
+                        $chain = 'htmlspecialchars(strip_tags(' . $chain . '), ENT_QUOTES, \'UTF-8\', true)';
                         break;
                         
                     case 'urlencode':
@@ -246,7 +246,7 @@ class Template
                         break;
                         
                     case 'br':
-                        $chain = $escape ? ('nl2br(htmlentities(' . $chain . ', ENT_QUOTES, \'UTF-8\', false))') : ('nl2br(' . $chain . ')');
+                        $chain = $escape ? ('nl2br(htmlspecialchars(' . $chain . ', ENT_QUOTES, \'UTF-8\', true))') : ('nl2br(' . $chain . ')');
                         $escape = false;
                         break;
                         
@@ -271,8 +271,8 @@ class Template
                         break;
                     
                     case 'link':
-                        $argvalue = htmlentities($argvalue, ENT_QUOTES, 'UTF-8', false);
-                        $chain = $escape ? ('htmlentities(' . $chain . ', ENT_QUOTES, \'UTF-8\', false)') :  $chain;
+                        $argvalue = htmlspecialchars($argvalue, ENT_QUOTES, 'UTF-8', false);
+                        $chain = $escape ? ('htmlspecialchars(' . $chain . ', ENT_QUOTES, \'UTF-8\', true)') :  $chain;
                         $chain = '\'<a href="\'.' . (empty($argvalue) ? $chain : $argvalue) . '.\'">\'.' . $chain . '.\'</a>\'';
                         $escape = false;
                         break;
@@ -281,7 +281,7 @@ class Template
             
             // Return the result.
             
-            return $escape ? ('<?php echo htmlentities(' . $chain . ', ENT_QUOTES, \'UTF-8\', false); ?>') : ('<?php echo ' . $chain . '; ?>');
+            return $escape ? ('<?php echo htmlspecialchars(' . $chain . ', ENT_QUOTES, \'UTF-8\', true); ?>') : ('<?php echo ' . $chain . '; ?>');
         }
         
         // In all other cases, return intact.
