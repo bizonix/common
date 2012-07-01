@@ -8,6 +8,7 @@ class Cache
     
     protected function __construct() { }
     protected static $_con = null;
+    protected static $_driver = null;
     
     // Initialize the cache connection.
     
@@ -15,6 +16,7 @@ class Cache
     {
         if (class_exists('\Memcached'))
         {
+            self::$_driver = 'Memcached';
             self::$_con = new \Memcached();
             foreach($servers as $server)
             {
@@ -23,6 +25,19 @@ class Cache
                 $port = isset($server[1]) ? $server[1] : 11211;
                 $weight = isset($server[2]) ? $server[2] : 100;
                 self::$_con->addServer($host, $port, $weight);
+            }
+        }
+        elseif (class_exists('\Memcache'))
+        {
+            self::$_driver = 'Memcache';
+            self::$_con = new \Memcache();
+            foreach($servers as $server)
+            {
+                $server = explode(':', $server);
+                $host = $server[0];
+                $port = isset($server[1]) ? $server[1] : 11211;
+                $weight = isset($server[2]) ? $server[2] : 100;
+                self::$_con->addServer($host, $port, true, $weight);
             }
         }
         else
@@ -42,7 +57,14 @@ class Cache
     
     public static function set($key, $value = null, $ttl = 3600)
     {
-        return self::$_con->set($key, $value, $ttl);
+        if (self::$_driver === 'Memcached')
+        {
+            return self::$_con->set($key, $value, $ttl);
+        }
+        else
+        {
+            return self::$_con->set($key, $value, 0, $ttl);
+        }
     }
     
     // DELETE method.
