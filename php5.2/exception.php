@@ -8,7 +8,7 @@ class CommonException extends Exception
     
     public static function replace_errors()
     {
-        set_error_handler(function($errno, $errstr, $errfile, $errline)
+        function common_error_handler($errno, $errstr, $errfile, $errline)
         {
             switch ($errno)
             {
@@ -35,7 +35,8 @@ class CommonException extends Exception
                 default:
                     throw new CommonErrorException($errstr, 0, $errno, $errfile, $errline);
             }
-        }, -1);
+        }
+        set_error_handler('common_error_handler', -1);
     }
 }
 
