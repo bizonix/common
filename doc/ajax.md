@@ -6,7 +6,7 @@ This class provides some shortcuts for quickly returning some message or content
 This is particularly useful when handling AJAX requests, hence the name of this module.
 This class normally assumes that the request is made using JavaScript,
 and that the response will be processed by JavaScript.
-The type of the response can be determined by the "status" property of the returned object.
+The type of the response can be determined by reading the "status" property of the returned object.
 
 ### AJAX::content()
 
