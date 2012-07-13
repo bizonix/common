@@ -57,7 +57,7 @@ Arguments:
 Explanation:
 
   - This method prints a JSON string formatted as described below, and exits.
-  - If the request was _not_ made using JavaScript, this method will print "ERROR: "
+  - If the request was _not_ made using JavaScript, this method will print `ERROR: `
     followed by the message. No special HTTP headers will be sent.
   
 Usage:
