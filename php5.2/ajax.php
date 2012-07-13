@@ -49,10 +49,7 @@ class AJAX
         }
         else
         {
-            $view = new View('error');
-            $view->title = 'Error';
-            $view->message = $message;
-            $view->render();
+            Response::send_page('ERROR: ' . $message, 'text/plain', 0);
         }
     }
 }
