@@ -17,7 +17,7 @@ Explanation:
     The port defaults to 11211 if not specified.
     Weights do not need to add up to any particular sum, but default to 100 if not specified.
   - Examples of valid inputs include:
-  
+
     array('127.0.0.1')
     array('127.0.0.1:11211', '127.0.0.1:11212')
     array('192.168.0.101:11211:50', '192.168.0.102:11211:30', ''192.168.0.103:11211:20')

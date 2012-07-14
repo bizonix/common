@@ -42,28 +42,36 @@ class Crypto
 
     // Encrypt method.
     
-    public function encrypt($input, $return_as_blob = false)
+    public function encrypt($plaintext, $return_as_blob = false)
     {
         // Check if the key has been entered.
         
         if ($this->_key === false) throw new CryptoException('Please call set_key() first.');
         
+        // Compress the plaintext.
+        
+        $plaintext = gzcompress($plaintext);
+        
         // Create an IV.
         
         $iv = mcrypt_create_iv(mcrypt_get_iv_size($this->_cipher, $this->_mode), MCRYPT_DEV_URANDOM);
         
+        // Resize the key.
+        
+        $key = substr(hash('sha256', $this->_key), 0, mcrypt_get_key_size($this->_cipher, $this->_mode));
+        
         // Encrypt, and attach the IV to the ciphertext.
         
-        $output = $iv . mcrypt_encrypt($this->_cipher, $this->_key, $input, $this->_mode, $iv);
+        $ciphertext = $iv . mcrypt_encrypt($this->_cipher, $key, $plaintext, $this->_mode, $iv);
         
         // Return the result.
         
-        return $return_as_blob ? $output : base64_encode($output);
+        return $return_as_blob ? $ciphertext : base64_encode($ciphertext);
     }
     
     // Decrypt method.
     
-    public function decrypt($input, $input_is_blob = false)
+    public function decrypt($ciphertext, $input_is_blob = false)
     {
         // Check if the key has been entered.
         
@@ -73,23 +81,30 @@ class Crypto
         
         if (!$input_is_blob)
         {
-            $input = base64_decode($input);
-            if ($input === false) throw new CryptoException('Invalid base-64 encoding.');
+            $ciphertext = base64_decode($ciphertext);
+            if ($ciphertext === false) throw new CryptoException('Invalid base-64 encoding.');
         }
         
-        // Detach the initialize vector from the ciphertext.
+        // Detach the IV from the ciphertext.
         
         $ivsize = mcrypt_get_iv_size($this->_cipher, $this->_mode);
-        $iv = substr($input, 0, $ivsize);
-        $_ciphertext = substr($input, $ivsize);
+        $iv = substr($ciphertext, 0, $ivsize);
+        
+        // Resize the key.
+        
+        $key = substr(hash('sha256', $this->_key), 0, mcrypt_get_key_size($this->_cipher, $this->_mode));
         
         // Decrypt.
         
-        $output = mcrypt_decrypt($this->_cipher, $this->_key, $_ciphertext, $this->_mode, $iv);
+        $plaintext = mcrypt_decrypt($this->_cipher, $key, substr($ciphertext, $ivsize), $this->_mode, $iv);
+        
+        // Decompress the plaintext.
+        
+        $plaintext = gzuncompress($plaintext);
         
         // Return the result.
         
-        return $input_is_blob ? $output : rtrim($output, "\0");
+        return $plaintext; //rtrim($plaintext, "\0");
     }
 }
 
