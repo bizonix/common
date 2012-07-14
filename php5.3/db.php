@@ -24,7 +24,6 @@ class DB
         {
             self::$_dbh = new \PDO('sqlite:' . $filename_or_pdo);
         }
-        self::$_dbh->setAttribute(\PDO::ATTR_CASE, \PDO::CASE_LOWER);
         self::$_dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
     

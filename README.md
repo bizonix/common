@@ -31,5 +31,7 @@ The two versions are identical except:
 
   - [AJAX](https://github.com/kijin/common/blob/master/doc/ajax.md)
   - [Cache](https://github.com/kijin/common/blob/master/doc/cache.md)
+  - [Crypto](https://github.com/kijin/common/blob/master/doc/crypto.md)
+  - [DB](https://github.com/kijin/common/blob/master/doc/db.md)
 
 More documentation will be added in the future.

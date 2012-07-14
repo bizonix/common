@@ -4,6 +4,8 @@ Cache Class
 
 This class offers a very easy way to use Memcached with your web application.
 It is compatible with both the new `Memcached` extension and the old `Memcache` extension.
+Since this class is static, it also helps you access Memcached from anywhere in your project
+without having to pass around connection handles or relying in global variables.
 
 ### Cache::initialize()
 
@@ -13,6 +15,8 @@ Arguments:
 
 Explanation:
 
+  - The Cache class needs to be initialized before any other methods can be called.
+    Once it is initialized, it can be referenced from anywhere in your project.
   - Each element of the array should be in the format `ipaddress[:port[:weight]]`.
     The port defaults to 11211 if not specified.
     Weights do not need to add up to any particular sum, but default to 100 if not specified.
