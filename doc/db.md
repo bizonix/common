@@ -75,7 +75,7 @@ Usage:
     echo $user->name;
     
     $query2 = DB::query('UPDATE users SET name = :name, email = :email WHERE id = :id', array(
-        ':id' => 1337
+        ':id' => 1337,
         ':name' => 'John Doe',
         ':email' => 'john@doe.com',
     ));
@@ -145,13 +145,15 @@ Explanation:
 
   - This method begins a transaction if no transaction is currently in progress, and does nothing otherwise.
     In other words, this method offers _fake_ nested transactions.
-  - This may be useful if you are writing a subroutine and you cannot easily tell from inside the subroutine
-    whether or not a transaction is currently in progress.
+  - This may be useful if you are writing a subroutine that may be reused in different contexts,
+    so that the subroutine cannot always assume that a transaction is or isn't currently in progress.
     If no transaction is in progress, the subroutine can make atomic changes to the database;
     otherwise, any changes that the subroutine makes to the database will be atomically committed or discarded
-    when the outer routine commits or rolls back the transaction.
+    when the outer routine commits or rolls back the current transaction.
     In either case, you can be sure that the changes made by the subroutine will be atomic,
     even though many open-source databses do not support nested transactions.
+    This allows you to have as much atomicity as your database permits, without making your application overly complicated.
+    (However, it might often be a better idea to restructure your application slightly.)
   - Some databases support proper nested transactions.
     This method does not use such functionality even if it is available.
   - In PHP 5.3.3 and later, the `PDO` class has an `in_transaction()` method that can be used to determine
@@ -164,6 +166,7 @@ Explanation:
   - This method returns a **transaction ID** (int) that you must pass to `try_commit()` later.
     A `PDOException` may be thrown if a serious error occurs.
   - Note that some databases may not support transactions at all.
+  - **This functionality is experimental. Please use with caution.**
 
 Usage:
 
