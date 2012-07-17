@@ -8,35 +8,38 @@ class CommonException extends Exception
     
     public static function replace_errors()
     {
-        function common_error_handler($errno, $errstr, $errfile, $errline)
+        if (!function_exists('common_error_handler_callback'))
         {
-            switch ($errno)
+            function common_error_handler_callback($errno, $errstr, $errfile, $errline)
             {
-                case E_ERROR:
-                    throw new E_ERROR_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_WARNING:
-                    throw new E_WARNING_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_NOTICE:
-                    throw new E_NOTICE_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_DEPRECATED:
-                    throw new E_DEPRECATED_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_USER_ERROR:
-                    throw new E_USER_ERROR_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_USER_WARNING:
-                    throw new E_USER_WARNING_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_USER_NOTICE:
-                    throw new E_USER_NOTICE_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_USER_DEPRECATED:
-                    throw new E_USER_DEPRECATED_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_RECOVERABLE_ERROR:
-                    throw new E_RECOVERABLE_Exception($errstr, 0, $errno, $errfile, $errline);
-                case E_STRICT:
-                    throw new E_STRICT_Exception($errstr, 0, $errno, $errfile, $errline);
-                default:
-                    throw new CommonErrorException($errstr, 0, $errno, $errfile, $errline);
+                switch ($errno)
+                {
+                    case E_ERROR:
+                        throw new E_ERROR_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_WARNING:
+                        throw new E_WARNING_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_NOTICE:
+                        throw new E_NOTICE_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_DEPRECATED:
+                        throw new E_DEPRECATED_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_USER_ERROR:
+                        throw new E_USER_ERROR_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_USER_WARNING:
+                        throw new E_USER_WARNING_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_USER_NOTICE:
+                        throw new E_USER_NOTICE_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_USER_DEPRECATED:
+                        throw new E_USER_DEPRECATED_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_RECOVERABLE_ERROR:
+                        throw new E_RECOVERABLE_Exception($errstr, 0, $errno, $errfile, $errline);
+                    case E_STRICT:
+                        throw new E_STRICT_Exception($errstr, 0, $errno, $errfile, $errline);
+                    default:
+                        throw new CommonErrorException($errstr, 0, $errno, $errfile, $errline);
+                }
             }
         }
-        set_error_handler('common_error_handler', -1);
+        set_error_handler('common_error_handler_callback', -1);
     }
 }
 

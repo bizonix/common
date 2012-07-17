@@ -40,7 +40,7 @@ class Cache
         }
         else
         {
-            throw new CacheException('Memcached extension is not available.');
+            throw new CommonCacheException('Memcached extension is not available.');
         }
     }
     
@@ -98,4 +98,4 @@ class Cache
     }
 }
 
-class CacheException extends Exception { }
+class CommonCacheException extends CommonException { }

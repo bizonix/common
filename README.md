@@ -24,7 +24,7 @@ If you have PHP 5.3 or later, use the **php5.3** classes.
 The two versions are identical except:
 
   - The 5.3 version uses the `Common` namespace, whereas the 5.2 version does not use any namespaces.
-  - The Exception class behaves slightly differently in 5.3 and 5.2, because of namespacing.
+  - Exception classes have slightly different names in 5.3 and 5.2, because of namespacing.
     Please see the documentation for the Exception class for more information.
 
 ### Class Reference
@@ -33,5 +33,6 @@ The two versions are identical except:
   - [Cache](https://github.com/kijin/common/blob/master/doc/cache.md)
   - [Crypto](https://github.com/kijin/common/blob/master/doc/crypto.md)
   - [DB](https://github.com/kijin/common/blob/master/doc/db.md)
+  - [Exception](https://github.com/kijin/common/blob/master/doc/exception.md)
 
 More documentation will be added in the future.

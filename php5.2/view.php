@@ -22,14 +22,14 @@ class View
         // Check if the view file exists.
         
         $this->_filename = self::$_dir . '/' . $name . '.php';
-        if (!file_exists($this->_filename)) throw new ViewException("View '{$name}' does not exist.");
+        if (!file_exists($this->_filename)) throw new CommonViewException("View '{$name}' does not exist.");
     }
     
     // Generic getter method.
     
     public function __get($name)
     {
-        if (!isset($this->_vars[$name])) throw new ViewException("Undefined property: '{$name}'");
+        if (!isset($this->_vars[$name])) throw new CommonViewException("Undefined property: '{$name}'");
         return $this->_vars[$name];
     }
     
@@ -78,4 +78,4 @@ class View
     }
 }
 
-class ViewException extends Exception { }
+class CommonViewException extends CommonException { }

@@ -8,7 +8,7 @@ class Fetcher
     {
         if (!function_exists('curl_init'))
         {
-            throw new FetcherException('cURL module is not available.');
+            throw new CommonFetcherException('cURL module is not available.');
         }
         
         $ch = curl_init();
@@ -26,4 +26,4 @@ class Fetcher
     }
 }
 
-class FetcherException extends Exception { }
+class CommonFetcherException extends CommonException { }

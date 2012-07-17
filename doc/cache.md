@@ -28,7 +28,8 @@ Explanation:
 
 Errors:
 
-  - `CacheException` if no compatible extension is found.
+  - PHP 5.3: `\Common\CacheException` if no compatible extension is found.
+  - PHP 5.2: `CommonCacheException` if no compatible extension is found.
 
 ### Cache::get()
 

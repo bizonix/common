@@ -87,14 +87,14 @@ class Language
             }
             else
             {
-                throw new LanguageException($filename . ' does not contain $translations.');
+                throw new CommonLanguageException($filename . ' does not contain $translations.');
             }
         }
         else
         {
-            throw new LanguageException($filename . ' does not exist.');
+            throw new CommonLanguageException($filename . ' does not exist.');
         }
     }
 }
 
-class LanguageException extends Exception { }
+class CommonLanguageException extends CommonException { }

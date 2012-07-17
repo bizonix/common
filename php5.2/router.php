@@ -34,7 +34,7 @@ class Router
             else
             {
                 $first_slash = strpos($def, '/');
-                if (!$first_slash) throw new RouterException('Invalid route: ' . $def);
+                if (!$first_slash) throw new CommonRouterException('Invalid route: ' . $def);
                 $prefixes = explode(' ', substr($def, 0, $first_slash));
                 $def_method = (isset($prefixes[0]) && !empty($prefixes[0])) ? $prefixes[0] : null;
                 $def_host = (isset($prefixes[1]) && !empty($prefixes[1])) ? $prefixes[1] : null;
@@ -89,4 +89,4 @@ class Router
     }
 }
 
-class RouterException extends Exception { }
+class CommonRouterException extends CommonException { }

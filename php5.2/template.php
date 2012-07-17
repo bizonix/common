@@ -38,14 +38,14 @@ class Template
         // Check if the view file exists.
         
         $this->_filename = self::$_dir . '/' . $name . '.html';
-        if (!file_exists($this->_filename)) throw new TemplateException("Template '{$name}' does not exist.");
+        if (!file_exists($this->_filename)) throw new CommonTemplateException("Template '{$name}' does not exist.");
     }
     
     // Generic getter method.
     
     public function __get($name)
     {
-        if (!isset($this->_vars[$name])) throw new TemplateException("Undefined property: '{$name}'");
+        if (!isset($this->_vars[$name])) throw new CommonTemplateException("Undefined property: '{$name}'");
         return $this->_vars[$name];
     }
     
@@ -96,7 +96,7 @@ class Template
         
         // If the template does not exist, throw an exception.
         
-        if (!file_exists($filename)) throw new TemplateException("Template '{$filename}' does not exist.");
+        if (!file_exists($filename)) throw new CommonTemplateException("Template '{$filename}' does not exist.");
         
         // If this template has already been compiled, use the compiled version.
         
@@ -288,4 +288,4 @@ class Template
     }
 }
 
-class TemplateException extends Exception { }
+class CommonTemplateException extends CommonException { }

@@ -44,7 +44,7 @@ class Crypto
     {
         // Check if the key has been entered.
         
-        if ($this->_key === false) throw new CryptoException('Please call set_key() first.');
+        if ($this->_key === false) throw new CommonCryptoException('Please call set_key() first.');
         
         // Compress the plaintext.
         
@@ -73,14 +73,14 @@ class Crypto
     {
         // Check if the key has been entered.
         
-        if ($this->_key === false) throw new CryptoException('Please call set_key() first.');
+        if ($this->_key === false) throw new CommonCryptoException('Please call set_key() first.');
         
         // If input is not a blob, decode base64 first.
         
         if (!$input_is_blob)
         {
             $ciphertext = base64_decode($ciphertext);
-            if ($ciphertext === false) throw new CryptoException('Invalid base-64 encoding.');
+            if ($ciphertext === false) throw new CommonCryptoException('Invalid base-64 encoding.');
         }
         
         // Detach the IV from the ciphertext.
@@ -102,8 +102,8 @@ class Crypto
         
         // Return the result.
         
-        return $plaintext; //rtrim($plaintext, "\0");
+        return $plaintext;
     }
 }
 
-class CryptoException extends Exception { }
+class CommonCryptoException extends CommonException { }
