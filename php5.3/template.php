@@ -9,7 +9,7 @@ class Template
     protected static $_dir = null;
     protected static $_scratch_dir = null;
     protected $_filename = null;
-    protected $_language = null;
+    protected $_languages = array();
     protected $_vars = array();
     
     // Set the directory for template files.
@@ -24,13 +24,6 @@ class Template
     public static function set_scratch_dir($dir)
     {
         self::$_scratch_dir = rtrim($dir, '/');
-    }
-    
-    // Set the language object.
-    
-    public function set_language($language)
-    {
-        $this->_language = $language;
     }
     
     // Constructor.
@@ -56,6 +49,27 @@ class Template
     public function __set($name, $value)
     {
         $this->_vars[$name] = $value;
+    }
+    
+    // Add a language object.
+    
+    public function add_language($language)
+    {
+        $this->_languages[] = $language;
+    }
+    
+    // Translate method.
+    
+    public function translate($key, $args = array())
+    {
+        foreach ($this->_languages as $language)
+        {
+            if (($trans = $language->translate($key, $args)) !== null)
+            {
+                return $trans;
+            }
+        }
+        return null;
     }
     
     // Render method.
@@ -85,7 +99,7 @@ class Template
         extract($this->_vars);
         include $this->_get_compiled_filename($this->_filename);
         echo "\n";
-        exit();
+        exit;
     }
     
     // Get the filename of the compiled template.
@@ -166,12 +180,12 @@ class Template
         
         if ($code[0] === ':')
         {
-            // If it's a simple key, just call translate() on the language object.
+            // If it's a simple key, just call translate().
             
             $argpos = strpos($code, '(');
             if ($argpos === false)
             {
-                return '<?php echo $this->_language->translate(\'' . substr($code, 1) . '\'); ?>';
+                return '<?php echo $this->translate(\'' . substr($code, 1) . '\'); ?>';
             }
             
             // Otherwise, call translate() with the list of arguments.
@@ -180,7 +194,7 @@ class Template
             {
                 $key = substr($code, 1, $argpos - 1);
                 $args = substr($code, $argpos);
-                return '<?php echo $this->_language->translate(\'' . $key . '\', array' . $args . '); ?>';
+                return '<?php echo $this->translate(\'' . $key . '\', array' . $args . '); ?>';
             }
         }
         
