@@ -8,7 +8,6 @@ class Language
     
     protected static $_dir = false;
     protected $_language = false;
-    protected $_subset = false;
     protected $_translations = false;
     
     // Set the directory for translation files.
@@ -20,10 +19,9 @@ class Language
     
     // Constructor.
     
-    public function __construct($language, $subset = false)
+    public function __construct($language)
     {
         $this->_language = strtolower($language);
-        $this->_subset = strtolower($subset);
     }
     
     // Shortcut for translations with no arguments.
@@ -48,9 +46,9 @@ class Language
         
         if ($this->_translations === false) $this->_load_translations();
         
-        // If a translation does not exist, just return the key.
+        // If a translation does not exist, return null.
         
-        if (!array_key_exists($key, $this->_translations)) return $key;
+        if (!array_key_exists($key, $this->_translations)) return null;
         
         // If the first argument (not counting the key) is not an array, get all arguments.
         
@@ -75,8 +73,7 @@ class Language
     {
         // Load up the language file.
         
-        $subset = ($this->_subset === false || $this->_subset === '') ? '' : ".{$this->_subset}";
-        $filename = self::$_dir . '/' . $this->_language . $subset . '.php';
+        $filename = self::$_dir . '/' . $this->_language . '.php';
         
         // Include the file and extract the translations.
         
