@@ -5,6 +5,7 @@ class Language
     // Some instance variables.
     
     protected static $_dir = false;
+    protected $_dir_override = false;
     protected $_language = false;
     protected $_translations = false;
     
@@ -17,9 +18,10 @@ class Language
     
     // Constructor.
     
-    public function __construct($language)
+    public function __construct($language, $dir_override = false)
     {
         $this->_language = strtolower($language);
+        $this->_dir_override = $dir_override;
     }
     
     // Shortcut for translations with no arguments.
@@ -71,7 +73,14 @@ class Language
     {
         // Load up the language file.
         
-        $filename = self::$_dir . '/' . $this->_language . '.php';
+        if ($this->_dir_override === false)
+        {
+            $filename = self::$_dir . '/' . $this->_language . '.php';
+        }
+        else
+        {
+            $filename = $this->_dir_override . '/' . $this->_language . '.php';
+        }
         
         // Include the file and extract the translations.
         
