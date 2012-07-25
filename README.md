@@ -34,5 +34,8 @@ The two versions are identical except:
   - [Crypto](https://github.com/kijin/common/blob/master/doc/crypto.md)
   - [DB](https://github.com/kijin/common/blob/master/doc/db.md)
   - [Exception](https://github.com/kijin/common/blob/master/doc/exception.md)
+  - [Fetcher](https://github.com/kijin/common/blob/master/doc/fetcher.md)
+  - [Language](https://github.com/kijin/common/blob/master/doc/language.md)
+  - [MIME](https://github.com/kijin/common/blob/master/doc/mime.md)
 
 More documentation will be added in the future.
