@@ -61,7 +61,7 @@ For example:
         'hello' => 'Bonjour',
         'bye' => 'Au revoir',
         'my_name_is' => 'Je m'appelle %s',
-        'loves' => '%s aime $s',
+        'loves' => '%s aime %s',
     );
 
 ### ->translate()
@@ -77,6 +77,9 @@ Explanation:
   - You can also pass an array of strings to be interpolated into the translation.
     If you do so, the translation should contain placeholders in the format used by `printf()`.
   - It is also possible to pass an arbitrary number of additional arguments instead of an array.
+  - The Language class does not load translation files until a translation is actually required.
+    `LanguageException` will be thrown if a translation file cannot be found or if it does not contain the required array.
+    If there is a problem, this will happen the first time you call `translate()`, rather than in the constructor.
 
 Usage:
     
