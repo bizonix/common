@@ -22,13 +22,6 @@ class Request
         return $filter ? Security::filter($value, $filter) : $value;
     }
     
-    // Generic getter method, an alias to info().
-    
-    public function __get($name)
-    {
-        return self::info($name);
-    }
-    
     // Fetch some information about the request.
     
     public static function info($type)

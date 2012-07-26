@@ -37,6 +37,7 @@ The two versions are identical except:
   - [Fetcher](https://github.com/kijin/common/blob/master/doc/fetcher.md)
   - [Language](https://github.com/kijin/common/blob/master/doc/language.md)
   - [MIME](https://github.com/kijin/common/blob/master/doc/mime.md)
+  - [Request](https://github.com/kijin/common/blob/master/doc/request.md)
   - [Timer](https://github.com/kijin/common/blob/master/doc/timer.md)
 
 More documentation will be added in the future.
