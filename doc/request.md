@@ -32,6 +32,18 @@ Explanation:
   - This method works in the same way as `get()`, except it returns the value of `$_POST[$name]`.
   - Multi-dimensional POST values are not supported.
 
+### Request::file()
+
+Arguments:
+
+  - string $name
+
+Explanation:
+
+  - This method returns an instance of the Upload class, which you can use to work with an uploaded file.
+  - You must supply the name of the `<input type="file">` element that was used to upload the file.
+  - Please see documentation for the Upload class for more information.
+
 ### Request::info()
 
 Arguments:

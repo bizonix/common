@@ -22,6 +22,13 @@ class Request
         return $filter ? Security::filter($value, $filter) : $value;
     }
     
+    // Uploaded file wrapper.
+    
+    public static function file($name)
+    {
+        return new Upload($name);
+    }
+    
     // Fetch some information about the request.
     
     public static function info($type)
