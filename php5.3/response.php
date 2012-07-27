@@ -66,7 +66,7 @@ class Response
     
     // Send a file.
     
-    public static function send_file($filename, $name = false)
+    public static function send_file($filename, $name = false, $expires = false)
     {
         // If name is empty, infer from the filename.
         
@@ -94,6 +94,20 @@ class Response
 		header('Content-Disposition: attachment; filename="' . $name . '"');
         header('Content-Transfer-Encoding: binary');
         header('Content-Length: ' . filesize($filename));
+        
+        // Set the cache-control headers.
+        
+        if ($expires === 0)
+        {
+            header('Cache-Control: no-cache, no-store, must-revalidate, post-check=0, pre-check=0');
+            header('Expires: Sat, 01 Jan 2000 00:00:00 GMT');
+            header('Pragma: no-cache');
+        }
+        elseif ($expires > 0)
+        {
+            header('Cache-Control: max-age=' . (int)$expires);
+            header('Expires: ' . date('D, d M Y H:i:s', time() + (int)$expires) . ' GMT');
+        }
         
         // Read the file in 64KB chunks. No, we can't use readfile() on large files because PHP is stupid.
         
