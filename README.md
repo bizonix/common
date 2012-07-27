@@ -35,6 +35,7 @@ The two versions are identical except:
   - [DB](https://github.com/kijin/common/blob/master/doc/db.md)
   - [Exception](https://github.com/kijin/common/blob/master/doc/exception.md)
   - [Fetcher](https://github.com/kijin/common/blob/master/doc/fetcher.md)
+  - [File](https://github.com/kijin/common/blob/master/doc/file.md)
   - [Language](https://github.com/kijin/common/blob/master/doc/language.md)
   - [MIME](https://github.com/kijin/common/blob/master/doc/mime.md)
   - [Request](https://github.com/kijin/common/blob/master/doc/request.md)
