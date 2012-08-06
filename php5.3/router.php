@@ -10,7 +10,7 @@
  * @copyright  (c) 2012, Kijin Sung <kijin@kijinsung.com>
  * @license    GPL v3 <http://www.opensource.org/licenses/gpl-3.0.html>
  * @link       http://github.com/kijin/common
- * @version    201207.1
+ * @version    201207.2
  * 
  * -----------------------------------------------------------------------------
  * 
@@ -41,17 +41,26 @@ class Router
     protected static $_shortcuts = array('(alpha)', '(alnum)', '(num)', '(int)', '(hex)', '(any)');
     protected static $_regexes = array('([a-zA-Z]+)', '([a-zA-Z0-9]+)', '([0-9]+)', '([1-9][0-9]*)', '([a-fA-F0-9]+)', '([a-zA-Z0-9._-]+)');
     
-    // The actual dispatcher.
+    // The dispatcher.
     
-    public static function dispatch($routes)
+    public static function dispatch($routes, $url_override = false)
     {
         // Fetch some information about the current request.
         
         $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '';
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
-        $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
-        $url = substr($url, 0, (($pos = strpos($url, '?')) !== false) ? $pos : strlen($url));
-        $url = substr($url, strlen(rtrim(dirname($_SERVER['SCRIPT_NAME']), '/')));
+        
+        if ($url_override === false)
+        {
+            $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+            $url = substr($url, 0, (($pos = strpos($url, '?')) !== false) ? $pos : strlen($url));
+            $url = substr($url, strlen(rtrim(dirname($_SERVER['SCRIPT_NAME']), '/')));
+        }
+        else
+        {
+            if (!$url_override || $url_override[0] !== '/') throw new RouterException('Invalid URL override: ' . $url_override);
+            $url = $url_override;
+        }
         
         // Try to match routes to the current request.
         
@@ -75,7 +84,7 @@ class Router
                 $def_url = substr($def, $first_slash);
             }
             
-            // Try to match the request method, hostname, and the URI.
+            // Try to match the request method, hostname, and the URL.
             
             if (!is_null($def_method) && $def_method !== $method) continue;
             if (!is_null($def_host) && $def_host !== $host) continue;

@@ -39,6 +39,7 @@ The two versions are identical except:
   - [Language](https://github.com/kijin/common/blob/master/doc/language.md)
   - [MIME](https://github.com/kijin/common/blob/master/doc/mime.md)
   - [Request](https://github.com/kijin/common/blob/master/doc/request.md)
+  - [Router](https://github.com/kijin/common/blob/master/doc/router.md)
   - [Timer](https://github.com/kijin/common/blob/master/doc/timer.md)
   - [Upload](https://github.com/kijin/common/blob/master/doc/upload.md)
 
