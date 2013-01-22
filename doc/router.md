@@ -43,14 +43,13 @@ Route Definition Example:
 
 Route Definition Syntax:
 
-  - Each member of the supplied array should be a key-value pair such as below:
+  - Each member of the supplied array should be a key-value pair such as below:  
+    `'[METHOD] [HOST]/parts/of/address/(placeholder1)/(placeholder2)/etc' => 'callback'`
 
-    '[METHOD] [HOST]/parts/of/address/(placeholder1)/(placeholder2)/etc' => 'callback',
-
-  - If a method (GET, POST, HEAD) is specified, only those requests that use the correct method will be
+  - If a method (GET, POST, HEAD) is specified, only requests that use the correct method will be
     passed to the callback. This is a good way to distinguish between GET and POST requests to the same URL.
 
-  - If a hostname is specified, only those requests that use the same hostname (domain) will be
+  - If a hostname is specified, only requests that use the same hostname (domain) will be
     passed to the callback. This is a good way to distinguish between requests to different aliases.
 
   - Placeholders or regular expressions enclosed in parentheses will be evaluated
