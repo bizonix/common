@@ -41,6 +41,8 @@ The two versions are identical except:
   - [Request](https://github.com/kijin/common/blob/master/doc/request.md)
   - [Response](https://github.com/kijin/common/blob/master/doc/response.md)
   - [Router](https://github.com/kijin/common/blob/master/doc/router.md)
+  - [Security](https://github.com/kijin/common/blob/master/doc/security.md)
+  - [Session](https://github.com/kijin/common/blob/master/doc/session.md)
   - [Timer](https://github.com/kijin/common/blob/master/doc/timer.md)
   - [UA](https://github.com/kijin/common/blob/master/doc/ua.md)
   - [Upload](https://github.com/kijin/common/blob/master/doc/upload.md)
