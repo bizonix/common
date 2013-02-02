@@ -9,6 +9,10 @@ but I make absolutely no guarantee that these classes will fit your style of web
 These classes make heavy use of static methods.
 This helps simplify a lot of common tasks, but may not be suitable for large projects.
 
+As of February 2013, this collection is no longer actively developed.
+However, I will continue to fix bugs for the foreseeable future.
+Please do not hesitate to report any bugs or incorrect documentation that you find.
+
 ### Getting Started
 
 Include the following line at the top of your script:
@@ -43,8 +47,8 @@ The two versions are identical except:
   - [Router](https://github.com/kijin/common/blob/master/doc/router.md)
   - [Security](https://github.com/kijin/common/blob/master/doc/security.md)
   - [Session](https://github.com/kijin/common/blob/master/doc/session.md)
+  - [Template](https://github.com/kijin/common/blob/master/doc/template.md)
   - [Timer](https://github.com/kijin/common/blob/master/doc/timer.md)
   - [UA](https://github.com/kijin/common/blob/master/doc/ua.md)
   - [Upload](https://github.com/kijin/common/blob/master/doc/upload.md)
-
-More documentation will be added in the future.
+  - [View](https://github.com/kijin/common/blob/master/doc/view.md)
