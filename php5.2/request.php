@@ -10,7 +10,7 @@
  * @copyright  (c) 2012, Kijin Sung <kijin@kijinsung.com>
  * @license    GPL v3 <http://www.opensource.org/licenses/gpl-3.0.html>
  * @link       http://github.com/kijin/common
- * @version    201207.1
+ * @version    201302.1
  * 
  * -----------------------------------------------------------------------------
  * 
@@ -69,7 +69,10 @@ class Request
                 return isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 0;
                 
             case 'protocol':
-                return (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+                if (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 1 || $_SERVER['HTTPS'] == 'on')) return 'https';
+                if (isset($_SERVER['X-FORWARDED-PROTO']) && $_SERVER['X-FORWARDED-PROTO'] === 'https') return 'https';
+                if (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) return 'https';
+                return 'http';
                 
             case 'method':
                 return isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : null;
