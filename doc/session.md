@@ -10,6 +10,7 @@ It is one of the least useful classes in this collection, due to its simplicity.
 Arguments:
 
   - string $name (optional)
+  - string $save_path (optional)
 
 Explanation:
 
@@ -17,6 +18,8 @@ Explanation:
     This is equivalent to `session_start()`, except that the name can be customized in a single call.
   - This method also forces session IDs to be regenerated every 5 minutes.
   - If the name is not given, `PHPSESSID` is used by default.
+  - You can also specify a directory where session files will be stored.
+    By default, the configuration in php.ini is used.
 
 ### Session::refresh()
 

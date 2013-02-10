@@ -10,7 +10,7 @@
  * @copyright  (c) 2012, Kijin Sung <kijin@kijinsung.com>
  * @license    GPL v3 <http://www.opensource.org/licenses/gpl-3.0.html>
  * @link       http://github.com/kijin/common
- * @version    201207.1
+ * @version    201302.1
  * 
  * -----------------------------------------------------------------------------
  * 
@@ -34,8 +34,13 @@
 
 class Session
 {
-    public static function start($name = 'PHPSESSID')
+    public static function start($name = 'PHPSESSID', $save_path = false)
     {
+        if ($save_path !== false && file_exists($save_path) && is_dir($save_path))
+        {
+            session_save_path($save_path);
+        }
+        
         session_name($name);
         session_start();
         if (isset($_SESSION['last_refresh']) && $_SESSION['last_refresh'] < time() - 300)
